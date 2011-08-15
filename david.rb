@@ -12,7 +12,7 @@ module Anagram
   end
 
   # NOTE: This function will typically do nothing because @words_by_anagram_class
-  # will be populated in david_data.rb.
+  # will be populated in david_data2.rb.
   def self.words_by_anagram_class
     @words_by_anagram_class ||= words.each_with_object(Hash.new []) do |word, hash|
       hash[anagram_class word] += [word]
@@ -20,15 +20,15 @@ module Anagram
   end
 
   def self.prepare
-    File.open('david_data.rb', 'w') do |file|
+    File.open('david_data2.rb', 'w') do |file|
       file.write <<END
 module Anagram
 @w = @words_by_anagram_class = Hash.new([])
 END
 
-      words_by_anagram_class.each do |ac, words|
-        file.write "@w[#{ac.inspect}] = #{words.inspect}\n" 
-      end
+      words_by_anagram_class.keys.sort.each_slice(1000) do |slice|
+        file.write "@w.update #{slice.collect{|ac|"#{ac.inspect}=>#{words_by_anagram_class[ac].inspect}"}.join(',')}\n"
+      end 
 
       file.write <<EOF
 end
@@ -80,10 +80,10 @@ EOF
 end
 
 begin
-  require_relative 'david_data'
+  require_relative 'david_data2'
 rescue LoadError
-  puts "Preparing david_data.rb.  Next time this will be faster."
+  puts "Preparing david_data2.rb.  Next time this will be faster."
   Anagram.prepare
-  require_relative 'david_data'
+  require_relative 'david_data2'
 end
 
