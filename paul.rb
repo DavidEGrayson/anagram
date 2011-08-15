@@ -1,18 +1,15 @@
-require 'matrix'
-
 module Anagram
   @@zeros = 26.times.collect {0}
   
-  def self.to_vector(word)
+  def self.to_vector_array(word)
     array = @@zeros.dup
     word.each_byte { |x| array[x-65] += 1}
-    Vector[*array]
+    array
   end
 
   def self.two_word_anagrams_of(string)
     s = string.upcase
-    target = to_vector(s)
-    target_array = target.to_a
+    target = to_vector_array(s)
 
     vec_hash = {}
     ret = []
@@ -22,7 +19,7 @@ module Anagram
 
       bad = false
       word.each_byte do |x|
-        if target_array[x-65] == 0
+        if target[x-65] == 0
           bad = true
           break
         end
@@ -30,8 +27,11 @@ module Anagram
       next if bad
       next if word.length > string.length - 4
 
-      vec = to_vector(word)
-      diff = target - vec
+      vec = to_vector_array(word)
+      diff = Array.new(26) do |i|
+        target[i] - vec[i]
+      end
+
       if others = vec_hash[diff]
         others.each do |other_word|
           ret << "#{other_word} #{word}".downcase
