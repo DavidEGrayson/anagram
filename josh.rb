@@ -1,12 +1,14 @@
 module Anagram
   def self.words(target_sorted)
+#		@words ||= File.readlines('dictionary_full.txt').collect {|x| x.chomp}
 		@words = []
 		File.open('dictionary_full.txt','r') do |file|
 			start_char = target_sorted.first
 			end_char = target_sorted.last
 			while file.readline()[0] < start_char; end
-			until ((t = file.readline())[0]) > end_char
-				@words << file.readline[0..-1]
+			#until ((t = file.readline())[0]) > end_char
+			while (t=file.gets)
+				@words << t.chomp
 			end
 		end
 		@words
