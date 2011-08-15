@@ -28,6 +28,7 @@ module Anagram
         end
       end
       next if bad
+      next if word.length > string.length - 4
 
       vec = to_vector(word)
       diff = target - vec
