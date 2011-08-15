@@ -28,4 +28,3 @@ module Anagram
     result.collect {|x| x.downcase}
   end
 end
-
