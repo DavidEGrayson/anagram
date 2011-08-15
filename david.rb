@@ -38,14 +38,14 @@ EOF
 
   def self.each_partition(array, array1=[], array2=[], &block)
     if array.empty?
-      # array has been fully partitioned in to array1 and array2
+      # array has been fully partitioned into array1 and array2
       yield array1, array2
     else
-      # Try putting array[0] in to array1
+      # Try putting array[0] into array1
       array1.push array.shift
       each_partition array, array1, array2, &block
 
-      # Try putting array[0] in to array2
+      # Try putting it into array2
       array2.push array1.pop
       each_partition array, array1, array2, &block
 
