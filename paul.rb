@@ -13,7 +13,7 @@ module Anagram
     s = string.upcase
     target = to_vector(s)
     letters_in_target = {}
-    s.each_char { |c| letters_in_target[c] = true }
+    s.each_byte { |x| letters_in_target[x] = true }
 
     vec_hash = {}
     ret = []
@@ -22,8 +22,9 @@ module Anagram
       word.chomp!
 
       bad = false
-      word.each_char do |letter|
-        if !letters_in_target[letter]
+      array = @@zeros.dup
+      word.each_byte do |x|
+        if !letters_in_target[x]
           bad = true
           break
         end
