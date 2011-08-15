@@ -57,10 +57,10 @@ EOF
   def self.two_word_anagrams_of(string)
     result = []
 
-    each_partition(string.chars.sort) do |letters1, letters2|
+    each_partition(string.chars.sort) do |sorted_letters1, sorted_letters2|
       # Get the anagram classes
-      ac1 = letters1.join
-      ac2 = letters2.join
+      ac1 = sorted_letters1.join
+      ac2 = sorted_letters2.join
       
       # Get the possible words
       words_by_anagram_class[ac1].each do |word1|
