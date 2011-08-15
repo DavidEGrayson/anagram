@@ -15,7 +15,7 @@ module Anagram
     ret = []
     diff = Array.new(26)
 
-    open('dictionary_full.txt','rb').each do |word|
+    open('dictionary_full.txt','r').each do |word|
       word.chop!
 
       bad = false
@@ -30,7 +30,7 @@ module Anagram
 
       vec = to_vector_array(word)
       26.times do |i|
-        target[i] - vec[i]
+        diff[i] = target[i] - vec[i]
       end
 
       if others = vec_hash[diff]
