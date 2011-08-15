@@ -24,11 +24,11 @@ module Anagram
     else
       # Try putting array[0] in to array1
       array1.push array.shift
-      each_partition(array, array1, array2, &block)
+      each_partition array, array1, array2, &block
 
       # Try putting array[0] in to array2
       array2.push array1.pop
-      each_partition(array, array1, array2, &block)
+      each_partition array, array1, array2, &block
 
       # Restore the arrays to their original values.
       array.unshift array2.pop
