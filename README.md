@@ -11,7 +11,7 @@ To choose which algorithm you want to work on, run one of:
     export ALGORITHM=kata
     export ALGORITHM=david
 
-Alternatively, you can prepend "ALGORITHM=<name>" to any of the
+Alternatively, you can prepend "ALGORITHM=name" to any of the
 other commands listed in this documentation.
 
 While you are developing an algorithm, test it for correctness
