@@ -19,7 +19,7 @@ module Anagram
     ret = []
 
     open('dictionary_full.txt','rb').each do |word|
-      word.chomp!
+      word.chop!
 
       bad = false
       word.each_byte do |x|
