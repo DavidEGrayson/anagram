@@ -1,12 +1,10 @@
 module Anagram
   def self.words(target_sorted)
-#		@words ||= File.readlines('dictionary_full.txt').collect {|x| x.chomp}
 		@words = []
 		File.open('dictionary_full.txt','r') do |file|
 			start_char = target_sorted.first
 			end_char = target_sorted.last
 			while file.readline()[0] < start_char; end
-			#until ((t = file.readline())[0]) > end_char
 			while (t=file.gets)
 				@words << t.chomp
 			end
@@ -42,7 +40,7 @@ module Anagram
 		sorted_words = {}
 		s = string.chars.sort
 		words(s).each do |word|			
-			next if word.length >= string.length or string.index(word[0].chr).nil? or string.index(word[1].chr).nil? or string.index(word[2].chr).nil?
+			next if word.length >= string.length or string.index(word[0]).nil? or string.index(word[1]).nil? or string.index(word[2]).nil?
 			sorted = word.chars.sort
 			is_sub, leftovers = sub_anagram(sorted, s)
 			if is_sub
