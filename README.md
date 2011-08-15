@@ -27,7 +27,7 @@ Test it for speed and correctness by running:
 
     time ./go.rb
 
-Figure out how to speed it up by running (which has significant overhead):
+Figure out how to speed it up by running ruby-prof (which adds significant overhead):
 
     ruby-prof go.rb
 
