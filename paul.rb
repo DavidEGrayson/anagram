@@ -12,8 +12,7 @@ module Anagram
   def self.two_word_anagrams_of(string)
     s = string.upcase
     target = to_vector(s)
-    letters_in_target = {}
-    s.each_byte { |x| letters_in_target[x] = true }
+    target_array = target.to_a
 
     vec_hash = {}
     ret = []
@@ -23,7 +22,7 @@ module Anagram
 
       bad = false
       word.each_byte do |x|
-        if !letters_in_target[x]
+        if target_array[x-65] == 0
           bad = true
           break
         end
