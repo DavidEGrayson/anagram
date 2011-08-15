@@ -13,6 +13,7 @@ module Anagram
 
     vec_hash = {}
     ret = []
+    diff = Array.new(26)
 
     open('dictionary_full.txt','rb').each do |word|
       word.chop!
@@ -28,7 +29,7 @@ module Anagram
       next if word.length > string.length - 4
 
       vec = to_vector_array(word)
-      diff = Array.new(26) do |i|
+      26.times do |i|
         target[i] - vec[i]
       end
 
