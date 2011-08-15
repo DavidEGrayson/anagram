@@ -47,8 +47,8 @@ module Anagram
 	end
 
   # Self-explanatory example:
-  #   Anagram.candidate_words('JOSHHOLZ')
-  #     => {"HOOS_HJLZ"=>["OOHS", "SHOO"], "HJOS_HLOZ"=>["JOSH"], ... }
+  #   Anagram.candidate_words('JOSHVOLZ')
+  #     => {"HOOS_JLVZ"=>["OOHS", "SHOO"], "HJOS_LOVZ"=>["JOSH"], ... } 
 	def self.candidate_words(string)
 		sorted_words = {}
 		s = string.chars.sort
