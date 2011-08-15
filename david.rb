@@ -55,6 +55,9 @@ module Anagram
 
     result.uniq
   end
+  # TODO: We have to call uniq at the end because documenting
+  # has two 'n's.  Try to make the algorithm smarter so we don't
+  # have to call uniq and see if it gets faster.
 end
 
 
