@@ -22,7 +22,6 @@ module Anagram
       word.chomp!
 
       bad = false
-      array = @@zeros.dup
       word.each_byte do |x|
         if !letters_in_target[x]
           bad = true
