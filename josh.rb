@@ -42,6 +42,9 @@ module Anagram
 		return [false, '']
 	end
 
+  # Self-explanatory example:
+  #   Anagram.candidate_words('JOSHHOLZ')
+  #     => {"HOOS_HJLZ"=>["OOHS", "SHOO"], "HJOS_HLOZ"=>["JOSH"], ... }
 	def self.candidate_words(string)
 		sorted_words = {}
 		words.each do |word|
@@ -49,7 +52,6 @@ module Anagram
 			sorted = word.chars.sort
 			is_sub, leftovers = sub_anagram(sorted, string.chars.sort)
 			if is_sub
-				joined = sorted.join
 				if sorted_words[leftovers]
 					sorted_words[leftovers] << word
 				else
