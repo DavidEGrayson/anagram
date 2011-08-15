@@ -18,6 +18,14 @@ module Anagram
 		result
 	end
 
+  # Determines whether string1 is a sub anagram of string2
+  # (i.e. string1 can be made out of the letters from string2,
+  # with leftover letters allowed).
+  # NOTE: string1 and string2 are NOT strings, they are sorted
+  # arrays of characters.
+  # This function returns an array:
+  #   Element 0 is true or false.
+  #   Element 1 is a special string.
 	def self.sub_anagram(string1, string2)
 		s1_pos, s2_pos = 0, 0
 		leftovers = ''
