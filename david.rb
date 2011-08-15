@@ -11,9 +11,28 @@ module Anagram
     @words ||= File.readlines("dictionary_full.txt").collect { |line| line.chomp.downcase } 
   end
 
+  # NOTE: This function will typically do nothing because @words_by_anagram_class
+  # will be populated in david_data.rb.
   def self.words_by_anagram_class
     @words_by_anagram_class ||= words.each_with_object(Hash.new []) do |word, hash|
       hash[anagram_class word] += [word]
+    end
+  end
+
+  def self.prepare
+    File.open('david_data.rb', 'w') do |file|
+      file.write <<END
+module Anagram
+@w = @words_by_anagram_class = Hash.new([])
+END
+
+      words_by_anagram_class.each do |ac, words|
+        file.write "@w[#{ac.inspect}] = #{words.inspect}\n" 
+      end
+
+      file.write <<EOF
+end
+EOF
     end
   end
 
@@ -60,4 +79,11 @@ module Anagram
   # have to call uniq and see if it gets faster.
 end
 
+begin
+  require_relative 'david_data'
+rescue LoadError
+  puts "Preparing david_data.rb.  Next time this will be faster."
+  Anagram.prepare
+  require_relative 'david_data'
+end
 
