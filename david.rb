@@ -27,7 +27,7 @@ module Anagram
 END
 
       words_by_anagram_class.keys.sort.each_slice(1000) do |slice|
-        file.write "@w.update #{slice.collect{|ac|"#{ac.inspect}=>#{words_by_anagram_class[ac].inspect}"}.join(',')}\n"
+        file.write "@w.update #{slice.collect{|ac|"#{ac.inspect}=>#{words_by_anagram_class[ac].inspect}"}.join(',')}\n".gsub(?",?')
       end 
 
       file.write <<EOF
