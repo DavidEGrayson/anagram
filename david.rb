@@ -23,7 +23,7 @@ module Anagram
 
   def self.load_data
     w = @words_by_anagram_class = Hash.new([])
-    open(DataFilename).each do |line|
+    File.readlines(DataFilename).each do |line|
       ac, words = line.split(':')
       w[ac] = words.split(',')
     end
