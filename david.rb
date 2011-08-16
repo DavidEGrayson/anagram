@@ -1,4 +1,6 @@
 module Anagram
+  DataFilename = 'david_data.txt'
+
   def self.anagram_class(string)
     string.chars.sort.join
   end
@@ -12,27 +14,35 @@ module Anagram
   end
 
   # NOTE: This function will typically do nothing because @words_by_anagram_class
-  # will be populated in david_data2.rb.
+  # will be populated by load_data.
   def self.words_by_anagram_class
     @words_by_anagram_class ||= words.each_with_object(Hash.new []) do |word, hash|
       hash[anagram_class word] += [word]
     end
   end
 
-  def self.prepare
-    File.open('david_data2.rb', 'w') do |file|
-      file.write <<END
-module Anagram
-@w = @words_by_anagram_class = Hash.new([])
-END
+  def self.load_data
+    w = @words_by_anagram_class = Hash.new([])
+    open(DataFilename).each do |line|
+      ac, words = line.split(':')
+      w[ac] = words.split(',')
+    end
+  end
 
-      words_by_anagram_class.keys.sort.each_slice(1000) do |slice|
-        file.write "@w.update #{slice.collect{|ac|"#{ac.inspect}=>#{words_by_anagram_class[ac].inspect}"}.join(',')}\n".gsub(?",?')
-      end 
+  def self.create_data
+    File.open DataFilename, 'w' do |file|
+      words_by_anagram_class.keys.sort.each do |ac|
+        file.puts ac + ':' + words_by_anagram_class[ac].join(',')
+      end
+    end
+  end
 
-      file.write <<EOF
-end
-EOF
+  def self.create_and_load_data
+    if File.exist? DataFilename
+      load_data
+    else
+      puts "Preparing #{DataFilename}.  Next time this will be faster."
+      Anagram.create_data
     end
   end
 
@@ -79,11 +89,4 @@ EOF
   # have to call uniq and see if it gets faster.
 end
 
-begin
-  require_relative 'david_data2'
-rescue LoadError
-  puts "Preparing david_data2.rb.  Next time this will be faster."
-  Anagram.prepare
-  require_relative 'david_data2'
-end
-
+Anagram.create_and_load_data
