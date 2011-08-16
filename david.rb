@@ -1,5 +1,5 @@
 module Anagram
-  DataFilename = 'david_data.txt'
+  DataFilename = 'david_data2.txt'
 
   def self.anagram_class(string)
     string.chars.sort.join
@@ -24,15 +24,15 @@ module Anagram
   def self.load_data
     w = @words_by_anagram_class = Hash.new([])
     File.readlines(DataFilename).each do |line|
-      ac, words = line.split(':')
-      w[ac] = words.split(',')
+      parts = line.split
+      w[parts.shift] = parts
     end
   end
 
   def self.create_data
     File.open DataFilename, 'w' do |file|
       words_by_anagram_class.keys.sort.each do |ac|
-        file.puts ac + ':' + words_by_anagram_class[ac].join(',')
+        file.puts ac + ' ' + words_by_anagram_class[ac].join(' ')
       end
     end
   end
