@@ -18,13 +18,13 @@ describe "Anagram.anagram?" do
       Anagram.anagram?("ruby", "bury").should == true
     end
   end
-end
+end if Anagram.respond_to? :anagram?
 
 describe "Anagram.words" do
   it "is an array" do
     Anagram.words.should be_a_kind_of Array
   end
-end
+end if Anagram.respond_to? :words
 
 describe "Anagram.two_word_anagram_of" do
   context "given an empty string" do
@@ -35,7 +35,7 @@ describe "Anagram.two_word_anagram_of" do
 
   context "given the string 'documenting'" do
     before(:all) do
-      @result = Anagram.two_word_anagrams_of('documenting')
+      @result = Anagram.two_word_anagrams_of 'documenting'
       @result = @result.collect{|x| x.split(' ').sort.join(' ')}.sort
     end
 
@@ -49,6 +49,17 @@ describe "Anagram.two_word_anagram_of" do
 
     it "returns all the two word anagrams of documenting" do
       @result.should == ["ceding mount", "ceding muton", "ceding notum", "centimo dung", "centum dingo", "centum doing", "code munting", "coden muting", "coding unmet", "coed munting", "come dunting", "coming tuned", "condign mute", "coned muting", "coning muted", "contemn guid", "cumin tonged", "cunt mendigo", "deco munting", "demonic tung", "dicot gunmen", "duci tongmen", "duct omening", "ducting meno", "ducting nome", "ducting omen", "dung tonemic", "dunt genomic", "educt mignon", "genom induct", "gnome induct", "gnomic tuned", "midgut nonce", "minced ungot", "mucin tonged"]
+    end
+  end
+
+  context "given the string 'reappear'" do
+    before(:all) do
+      @result = Anagram.two_word_anagrams_of 'reappear'
+      @result = @result.collect{|x| x.split(' ').sort.join(' ')}.sort
+    end
+
+    it "returns all the two-word anagrams of the 'reappear'" do
+      @result.should == ["aper aper", "aper pare", "aper pear", "aper rape", "aper reap", "area prep", "area repp", "para peer", "para pree", "pare pare", "pare pear", "pare rape", "pare reap", "pear pear", "pear rape", "pear reap", "rape rape", "rape reap", "reap reap"]
     end
   end
 end
