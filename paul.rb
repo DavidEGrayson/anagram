@@ -33,12 +33,12 @@ module Anagram
         diff[i] = target[i] - vec[i]
       end
 
+      (vec_hash[vec] ||= []) << word
       if others = vec_hash[diff]
         others.each do |other_word|
           ret << "#{other_word} #{word}".downcase
         end
       end
-      (vec_hash[vec] ||= []) << word
     end
 
     ret

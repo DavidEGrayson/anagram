@@ -20,10 +20,10 @@ module Anagram
 				count = target[key] - (wh[key] or 0)
 				diff[key] = count if count > 0
 			end
+			(matches[wh] ||= []) << word
 			if ms = matches[diff]	
 				ms.each {|m| result << "#{m} #{word}"} 
 			end
-			(matches[wh] ||= []) << word
 		end	
     result.collect {|x| x.downcase}
   end
