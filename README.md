@@ -11,6 +11,7 @@ To choose which algorithm you want to work on, run one of:
     export ALGORITHM=kata
     export ALGORITHM=david
     export ALGORITHM=josh
+    export ALGORITHM=paul
 
 Alternatively, you can prepend "ALGORITHM=name" to any of the
 other commands listed in this documentation.
